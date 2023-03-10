@@ -9,14 +9,13 @@ import { AccountService } from './services';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit {
-  title = 'client';
-
   constructor(private accountService: AccountService) {}
 
   ngOnInit(): void {
+    this.setCurrentUser();
   }
 
-  setCurrentUser() {
+  private setCurrentUser() {
     const userString = localStorage.getItem('user');
     if (!userString) return;
     const user: User = JSON.parse(userString);
