@@ -1,4 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Member } from 'src/app/models';
+import { MembersService } from 'src/app/services/members/members.service';
 
 @Component({
   selector: 'app-member-list',
@@ -6,6 +8,23 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./member-list.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MemberListComponent {
+export class MemberListComponent implements OnInit {
+  members: Member[] = [];
+
+  constructor(private membersService: MembersService, private cdr: ChangeDetectorRef) {}
+
+  ngOnInit(): void {
+    this.loadMembers();
+  }
+
+  loadMembers() {
+    this.membersService.getMembers().subscribe({
+      next: members => {
+        this.members = members;
+        this.cdr.detectChanges();
+      },
+
+    });
+  }
 
 }
