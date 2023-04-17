@@ -4,11 +4,6 @@
     padding: 10px;
     border-radius: 4px;
   }
-  
-  .tab-content > .active{
-    display: flex;
-    flex-direction: column;
-  }
 
   .nav-tabs > li.open, .member-tabset > .nav-tabs > li:hover {
     border-bottom: 4px solid #fbcdcf;
