@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Member } from 'src/app/models';
 import { MembersService } from 'src/app/services/members/members.service';
 
@@ -9,22 +10,11 @@ import { MembersService } from 'src/app/services/members/members.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MemberListComponent implements OnInit {
-  members: Member[] = [];
+  members$: Observable<Member[]> | undefined;
 
-  constructor(private membersService: MembersService, private cdr: ChangeDetectorRef) {}
+  constructor(private membersService: MembersService) {}
 
   ngOnInit(): void {
-    this.loadMembers();
+    this.members$ = this.membersService.getMembers();
   }
-
-  loadMembers() {
-    this.membersService.getMembers().subscribe({
-      next: members => {
-        this.members = members;
-        this.cdr.detectChanges();
-      },
-
-    });
-  }
-
 }
