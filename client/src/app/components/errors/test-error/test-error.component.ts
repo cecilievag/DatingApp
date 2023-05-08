@@ -1,17 +1,16 @@
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-test-error',
   templateUrl: './test-error.component.html',
   styleUrls: ['./test-error.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TestErrorComponent implements OnInit {
   baseUrl = 'https://localhost:5001/api/';
   validationErrors: string[] = [];
 
-  constructor(private http: HttpClient, private cdr: ChangeDetectorRef) {}
+  constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
   }
@@ -50,7 +49,6 @@ export class TestErrorComponent implements OnInit {
       error: error => {
         console.log(error);
         this.validationErrors = error;
-        this.cdr.detectChanges();
       }
     });
   }

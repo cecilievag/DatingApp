@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs';
@@ -10,7 +10,6 @@ import { MembersService } from 'src/app/services/members/members.service';
   selector: 'app-member-edit',
   templateUrl: './member-edit.component.html',
   styleUrls: ['./member-edit.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MemberEditComponent implements OnInit {
   @ViewChild('editForm') 
@@ -28,15 +27,17 @@ export class MemberEditComponent implements OnInit {
   constructor(
     private accountService: AccountService,
     private membersService: MembersService,
-    private cdr: ChangeDetectorRef,
     private toastrService: ToastrService
     ) {
+    }
+    
+    ngOnInit(): void {
     this.accountService.currentUser$.pipe(take(1)).subscribe({
-      next: user => this.user = user
-    })
-  }
+      next: user => {
 
-  ngOnInit(): void {
+        this.user = user;
+      }
+    })
     this.loadMember();
   }
 
@@ -45,7 +46,6 @@ export class MemberEditComponent implements OnInit {
     this.membersService.getMember(this.user.username).subscribe({
       next: member => {
         this.member = member;
-        this.cdr.detectChanges();
       }
     });
   }

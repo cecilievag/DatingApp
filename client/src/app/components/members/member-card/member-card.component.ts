@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { Member } from 'src/app/models';
 
 @Component({
@@ -6,7 +6,6 @@ import { Member } from 'src/app/models';
   templateUrl: './member-card.component.html',
   styleUrls: ['./member-card.component.css'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MemberCardComponent {
   @Input()

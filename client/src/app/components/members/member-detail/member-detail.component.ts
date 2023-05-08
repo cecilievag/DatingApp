@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from '@kolkov/ngx-gallery';
 import { Member } from 'src/app/models';
@@ -8,14 +8,13 @@ import { MembersService } from 'src/app/services/members/members.service';
   selector: 'app-member-detail',
   templateUrl: './member-detail.component.html',
   styleUrls: ['./member-detail.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MemberDetailComponent implements OnInit {
   member: Member | undefined;
   galleryOptions: NgxGalleryOptions[] = [];
   galleryImages: NgxGalleryImage[] = [];
 
-  constructor(private membersService: MembersService, private route: ActivatedRoute, private cdr: ChangeDetectorRef) {}
+  constructor(private membersService: MembersService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.loadMember();
@@ -39,8 +38,6 @@ export class MemberDetailComponent implements OnInit {
           }
         ];
         this.galleryImages = this.getImages();
-        this.cdr.detectChanges();
-        
       }
     })
   }
