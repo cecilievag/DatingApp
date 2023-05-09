@@ -16,3 +16,14 @@ export interface Member {
     country: string;
     photos: Photo[];
 }
+
+export interface Register {
+    username: string;
+    knownAs: string;
+    gender: string;
+    dateOfBirth: string;
+    city: string;
+    country: string;
+    password: string;
+    confirmPassword: string;
+}

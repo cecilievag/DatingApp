@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
-import { User } from 'src/app/models';
+import { Register, User } from 'src/app/models';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -25,7 +25,7 @@ export class AccountService {
     );
   }
 
-  register(model: any) {
+  register(model: Register) {
     return this.http.post<User>(this.baseUrl + 'account/register', model).pipe(
       map((user: User) => {
         if(user) {
