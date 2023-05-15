@@ -52,7 +52,7 @@ import { DatePickerComponent } from './components/forms/date-picker/date-picker.
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
