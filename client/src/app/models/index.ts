@@ -3,3 +3,4 @@ export * from './member';
 export * from './photo';
 export * from './pagination';
 export * from './userParams'
+export * from './message';

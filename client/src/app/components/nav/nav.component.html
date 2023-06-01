@@ -14,7 +14,12 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/messages" routerLinkActive="active">
+          <a
+            class="nav-link"
+            routerLink="/messages"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
             Messages
           </a>
         </li>
@@ -27,36 +32,41 @@
     </ul>
 
     <div class="dropdown" *ngIf="currentUser$ | async as user" dropdown>
-      <img src="{{user.photoUrl || './assets/user.png'}}" alt="user photo">
-      <a class="dropdown-toggle text-light text-decoration-none ms-2" dropdownToggle>
+      <img src="{{ user.photoUrl || './assets/user.png' }}" alt="user photo" />
+      <a
+        class="dropdown-toggle text-light text-decoration-none ms-2"
+        dropdownToggle
+      >
         Welcome {{ user.knownAs }}
       </a>
       <div class="dropdown-menu mt-3" *dropdownMenu>
-        <a class="dropdown-item" routerLink="/member/edit">
-            Edit profile
-        </a>
-        <a class="dropdown-item" (click)="logout()">
-          Logout
-        </a>
+        <a class="dropdown-item" routerLink="/member/edit"> Edit profile </a>
+        <a class="dropdown-item" (click)="logout()"> Logout </a>
       </div>
     </div>
 
-    <form *ngIf="!(currentUser$ | async)" #loginForm="ngForm" class="d-flex" (ngSubmit)="login()" autocomplete="off">
-        <input
-            name="username" 
-            class="form-control me-2" 
-            type="text" 
-            placeholder="UserName"
-            [(ngModel)]="model.username"
-        >
-        <input 
-            class="form-control me-2" 
-            type="password" 
-            placeholder="Password"
-            name="password"
-            [(ngModel)]="model.password"
-        >
-        <button class="btn btn-success" type="submit">Login</button>
+    <form
+      *ngIf="!(currentUser$ | async)"
+      #loginForm="ngForm"
+      class="d-flex"
+      (ngSubmit)="login()"
+      autocomplete="off"
+    >
+      <input
+        name="username"
+        class="form-control me-2"
+        type="text"
+        placeholder="UserName"
+        [(ngModel)]="model.username"
+      />
+      <input
+        class="form-control me-2"
+        type="password"
+        placeholder="Password"
+        name="password"
+        [(ngModel)]="model.password"
+      />
+      <button class="btn btn-success" type="submit">Login</button>
     </form>
   </div>
 </nav>
