@@ -50,7 +50,6 @@ export class MessagesService {
     this.hubConnection.on('NewMessage', (message: Message) => {
       this.messageThread$.pipe(take(1)).subscribe({
         next: messages => {
-          console.log(message);
           if (messages) {
             this.messageThreadSource.next([...messages, message]);
           } else {
