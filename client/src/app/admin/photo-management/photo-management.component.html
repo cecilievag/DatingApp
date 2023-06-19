@@ -1,1 +1,14 @@
-<p>photo-management works!</p>
+<div *ngIf="photosForApproval as photos" class="d-flex">
+    <div *ngFor="let photo of photos" class="col-sm-2">
+        <h4>User: {{ photo.username }}</h4>
+        <img [src]="photo.url" alt="Photo" class="card-img-top img-thumbnail">
+        <div class="actions mt-2">
+            <button class="btn btn-success" (click)="approvePhoto(photo.id)">Approve</button>
+            <button class="btn btn-danger" (click)="rejectPhoto(photo.id)">Reject</button>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="photosForApproval && photosForApproval.length === 0">
+    No photos needing approval!
+</div>
